@@ -12,28 +12,28 @@ import redis
 UnionOfTypes = Union[str, bytes, int, float]
 
 
-# def count_calls(method: Callable) -> Callable:
-#     """
-#     a system to count how many
-#     times methods of the Cache class are called.
-#     :param method:
-#     :return:
-#     """
-#     key = method.__qualname__
+def count_calls(method: Callable) -> Callable:
+    """
+    a system to count how many
+    times methods of the Cache class are called.
+    :param method:
+    :return:
+    """
+    key = method.__qualname__
 
-#     @wraps(method)
-#     def wrapper(self, *args, **kwargs):
-#         """
-#         Wrap
-#         :param self:
-#         :param args:
-#         :param kwargs:
-#         :return:
-#         """
-#         self._redis.incr(key)
-#         return method(self, *args, **kwargs)
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """
+        Wrap
+        :param self:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
 
-#     return wrapper
+    return wrapper
 
 
 # def call_history(method: Callable) -> Callable:
